@@ -69,6 +69,7 @@ public class FormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         b = ActivityFormBinding.inflate(getLayoutInflater());
         setContentView(b.getRoot());
+        b.btnBack.setOnClickListener(v -> finish());
         db = new DBHelper(this);
         b.inputCategory.setSimpleItems(Transaction.CATEGORIES);
         b.inputCategory.setText(Transaction.OTHER_CATEGORY, false);

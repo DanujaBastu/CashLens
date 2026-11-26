@@ -13,4 +13,24 @@
         <item name="android:statusBarColor">@color/bg</item>
         <item name="android:navigationBarColor">@color/bg</item>
     </style>
+
+    <style name="Theme.MoneyManager.Starting.Base" parent="Theme.MoneyManager">
+        <item name="android:windowBackground">@drawable/launch_background</item>
+    </style>
+
+    <style name="Theme.MoneyManager.Starting" parent="Theme.MoneyManager.Starting.Base" />
+
+    <style name="Widget.MoneyManager.Segment" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="backgroundTint">@color/segmented_background</item>
+        <item name="android:textColor">@color/segmented_text</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+    </style>
+
+    <style name="Widget.MoneyManager.Back" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:contentDescription">Kembali</item>
+        <item name="android:src">@drawable/ic_back</item>
+    </style>
 </resources>

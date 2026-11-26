@@ -3,6 +3,7 @@ package com.example.moneymanager;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -35,9 +36,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && savedInstanceState == null) {
+            getSplashScreen().setOnExitAnimationListener(splash -> splash.animate()
+                    .alpha(0f)
+                    .setDuration(240)
+                    .setInterpolator(new DecelerateInterpolator())
+                    .withEndAction(splash::remove)
+                    .start());
+        }
+        setTheme(R.style.Theme_MoneyManager);
         super.onCreate(savedInstanceState);
         b = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(b.getRoot());
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S && savedInstanceState == null) {
+            b.getRoot().setAlpha(0f);
+            b.getRoot().animate().alpha(1f).setDuration(240).start();
+        }
 
         db = new DBHelper(this);
         adapter = new TransactionAdapter(t -> {

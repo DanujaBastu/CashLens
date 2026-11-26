@@ -13,15 +13,31 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="Tambah Transaksi"
-            android:textColor="@color/accent"
-            android:textSize="26sp"
-            android:textStyle="bold" />
+            android:layout_marginBottom="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                style="@style/Widget.MoneyManager.Back"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:accessibilityHeading="true"
+                android:text="Tambah Transaksi"
+                android:textColor="@color/text"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/toggleType"
@@ -34,7 +50,7 @@
 
             <Button
                 android:id="@+id/btnExpense"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/Widget.MoneyManager.Segment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -43,7 +59,7 @@
 
             <Button
                 android:id="@+id/btnIncome"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/Widget.MoneyManager.Segment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -52,10 +68,27 @@
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilAmount"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nominal"
+            app:prefixText="Rp ">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="0123456789.,"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilDate"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:hint="Tanggal">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -65,23 +98,6 @@
                 android:clickable="true"
                 android:focusable="false"
                 android:inputType="none" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilAmount"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="Jumlah Uang"
-            app:prefixText="Rp ">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etAmount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:digits="0123456789.,"
-                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -116,21 +132,21 @@
 
             <Button
                 android:id="@+id/btnCash"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/Widget.MoneyManager.Segment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:stateListAnimator="@animator/button_press"
-                android:text="Cash" />
+                android:text="Tunai" />
 
             <Button
                 android:id="@+id/btnCard"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/Widget.MoneyManager.Segment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:stateListAnimator="@animator/button_press"
-                android:text="Card" />
+                android:text="Kartu" />
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -138,7 +154,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Notes">
+            android:hint="Catatan (opsional)">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etNotes"
@@ -148,6 +164,43 @@
                 android:inputType="textMultiLine|textCapSentences"
                 android:minLines="2" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/surface" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Struk (opsional)"
+            android:textColor="@color/text"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnPhoto"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:stateListAnimator="@animator/button_press"
+            android:text="Tambahkan foto struk"
+            android:textColor="@color/accent"
+            app:strokeColor="@color/accent" />
+
+        <ImageView
+            android:id="@+id/imgReceipt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="Foto struk"
+            android:maxHeight="220dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -176,41 +229,5 @@
                 android:visibility="gone"
                 app:strokeColor="@color/red" />
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="16dp"
-            android:background="#2C2C2C" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Foto Struk"
-            android:textColor="@color/text"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/btnPhoto"
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:stateListAnimator="@animator/button_press"
-            android:text="Ambil / Pilih Foto Struk"
-            android:textColor="@color/accent"
-            app:strokeColor="@color/accent" />
-
-        <ImageView
-            android:id="@+id/imgReceipt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:adjustViewBounds="true"
-            android:contentDescription="Foto struk"
-            android:scaleType="fitCenter"
-            android:visibility="gone" />
     </LinearLayout>
 </ScrollView>

@@ -12,7 +12,6 @@ import com.example.moneymanager.databinding.ItemTransactionBinding;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.VH> {
 
@@ -46,15 +45,15 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         h.b.tvDay.setVisibility(startsDay ? View.VISIBLE : View.GONE);
         h.b.tvDay.setText(t.date);
         h.b.dayDivider.setVisibility(startsDay && position > 0 ? View.VISIBLE : View.GONE);
-        h.b.tvNotes.setText(t.notes.isEmpty() ? "(tanpa catatan)" : t.notes);
+        h.b.tvNotes.setText(t.notes.isEmpty() ? t.category : t.notes);
+        h.b.tvCategory.setVisibility(t.notes.isEmpty() && t.photoPath == null ? View.GONE : View.VISIBLE);
         h.b.tvCategory.setText(t.category + (t.photoPath != null ? "  •  ada struk" : ""));
         h.b.tvAmount.setText((t.income ? "+" : "−") + Transaction.rupiah(t.amount));
         h.b.tvAmount.setTextColor(ContextCompat.getColor(h.itemView.getContext(),
                 t.income ? R.color.income : R.color.expense));
-        h.b.tvMethod.setTextColor(h.b.tvAmount.getCurrentTextColor());
         h.b.transactionCard.setCardBackgroundColor(ContextCompat.getColor(h.itemView.getContext(),
                 t.income ? R.color.income_surface : R.color.expense_surface));
-        h.b.tvMethod.setText(t.method.toUpperCase(Locale.ROOT));
+        h.b.tvMethod.setText("Card".equals(t.method) ? "Kartu" : "Tunai");
         h.b.transactionCard.setOnClickListener(v -> listener.onClick(t));
     }
 
