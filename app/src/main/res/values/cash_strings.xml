@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cash_brand">CashLens</string>
+    <string name="cash_home">Beranda</string>
+    <string name="cash_history">Riwayat</string>
+    <string name="cash_map">Peta</string>
+    <string name="cash_insight">Insight</string>
+    <string name="cash_settings">Atur anggaran bulanan</string>
+    <string name="cash_add">Tambah transaksi</string>
+    <string name="cash_amount_positive">Nominal harus lebih dari Rp0</string>
+    <string name="cash_month_expense">Pengeluaran bulan ini</string>
+    <string name="cash_budget">Anggaran</string>
+    <string name="cash_budget_remaining">Sisa anggaran</string>
+    <string name="cash_budget_unset">Ketuk untuk mengatur anggaran</string>
+    <string name="cash_budget_used">Terpakai · %1$s</string>
+    <string name="cash_budget_hint">Anggaran dalam rupiah</string>
+    <string name="cash_budget_error">Masukkan nominal anggaran yang valid</string>
+    <string name="cash_save">Simpan</string>
+    <string name="cash_cancel">Batal</string>
+    <string name="cash_clear">Hapus anggaran</string>
+    <string name="cash_placeholder">—</string>
+    <string name="cash_record">Catat pengeluaran</string>
+    <string name="cash_scan">Pindai struk</string>
+    <string name="cash_voice">Input suara</string>
+    <string name="cash_manual">Input manual</string>
+    <string name="cash_categories">Pengeluaran per kategori</string>
+    <string name="cash_empty_categories">Belum ada pengeluaran bulan ini.</string>
+    <string name="cash_recent">Transaksi terbaru</string>
+    <string name="cash_all">Lihat semua</string>
+    <string name="cash_empty_transactions">Belum ada transaksi.</string>
+    <string name="cash_history_summary">Saldo %1$s\nPemasukan %2$s · Pengeluaran %3$s</string>
+    <string name="cash_transaction_detail">%1$s · %2$s</string>
+    <string name="cash_transaction_income">+%1$s</string>
+    <string name="cash_receipt_detail">Foto struk</string>
+    <string name="cash_card">Kartu</string>
+    <string name="cash_cash">Tunai</string>
+    <string name="cash_voice_prompt">Ucapkan catatan transaksi</string>
+    <string name="cash_voice_unavailable">Pengenalan suara tidak tersedia di perangkat ini.</string>
+</resources>

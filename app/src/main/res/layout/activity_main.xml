@@ -1,154 +1,320 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg">
+    android:background="@color/cash_background"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginBottom="84dp"
-        android:paddingHorizontal="20dp"
-        android:paddingTop="12dp">
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/cash_surface"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        app:strokeColor="@color/cash_outline"
+        app:strokeWidth="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="64dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:paddingHorizontal="16dp">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="26dp"
+                android:importantForAccessibility="no"
+                app:srcCompat="@drawable/ic_cash_receipt" />
 
             <TextView
+                style="@style/Widget.CashLens.Heading"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Money Manager"
-                android:textColor="@color/text"
-                android:textSize="24sp"
+                android:layout_marginStart="16dp"
+                android:text="@string/cash_brand"
+                android:textSize="22sp"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btnAnalysis"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:stateListAnimator="@animator/button_press"
-                android:text="Analisis" />
+            <ImageButton
+                android:id="@+id/btnSettings"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/cash_settings"
+                app:srcCompat="@drawable/ic_cash_settings" />
         </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
+    <ScrollView
+        android:id="@+id/homeContent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:cardBackgroundColor="@color/accent"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="0dp">
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvMonth"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Saldo saat ini"
-                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/cash_secondary"
                     android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/tvTotal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Rp0"
-                    android:textColor="@color/black"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAdd"
+                    style="@style/Widget.CashLens.Link"
+                    android:text="@string/cash_add" />
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/budgetCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/cash_green"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cash_month_expense"
+                        android:textColor="@color/cash_budget_text"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvTotal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@android:color/white"
+                        android:textSize="32sp" />
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/budgetProgress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:importantForAccessibility="no"
+                        android:max="1000"
+                        app:indicatorColor="@android:color/white"
+                        app:trackColor="@color/cash_budget_track"
+                        app:trackCornerRadius="4dp"
+                        app:trackThickness="8dp" />
+
+                    <TextView
+                        android:id="@+id/tvBudgetUsed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
+                        android:baselineAligned="false">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="4dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/cash_budget"
+                                android:textColor="@color/cash_budget_text"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/tvBudget"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@android:color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/cash_budget_remaining"
+                                android:textColor="@color/cash_budget_text"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/tvBudgetRemaining"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:textColor="@android:color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                style="@style/Widget.CashLens.Heading"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/cash_record" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnScan"
+                    style="@style/Widget.CashLens.Shortcut"
+                    android:background="@drawable/cash_scan_background"
+                    android:drawableTop="@drawable/ic_cash_scan"
+                    android:text="@string/cash_scan" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnVoice"
+                    style="@style/Widget.CashLens.Shortcut"
+                    android:layout_marginHorizontal="8dp"
+                    android:drawableTop="@drawable/ic_cash_mic"
+                    android:text="@string/cash_voice" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnManual"
+                    style="@style/Widget.CashLens.Shortcut"
+                    android:drawableTop="@drawable/ic_cash_edit"
+                    android:text="@string/cash_manual" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/Widget.CashLens.Heading"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/cash_categories" />
+
+            <TextView
+                android:id="@+id/categoriesEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="6dp"
+                android:text="@string/cash_empty_categories"
+                android:textColor="@color/cash_secondary" />
+
+            <LinearLayout
+                android:id="@+id/categoryRows"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    style="@style/Widget.CashLens.Heading"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/cash_recent" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAll"
+                    style="@style/Widget.CashLens.Link"
+                    android:text="@string/cash_all" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/recentEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="4dp"
+                android:text="@string/cash_empty_transactions"
+                android:textColor="@color/cash_secondary" />
+
+            <LinearLayout
+                android:id="@+id/recentRows"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/historyContent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal">
+            android:gravity="center_vertical">
 
-            <LinearLayout
+            <TextView
+                style="@style/Widget.CashLens.Heading"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="@drawable/panel_background"
-                android:padding="12dp">
+                android:text="@string/cash_history" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pengeluaran"
-                    android:textColor="@color/expense" />
-
-                <TextView
-                    android:id="@+id/tvExpense"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Rp0"
-                    android:textColor="@color/expense"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="@drawable/panel_background"
-                android:padding="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pemasukan"
-                    android:textColor="@color/income" />
-
-                <TextView
-                    android:id="@+id/tvIncome"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Rp0"
-                    android:textColor="@color/income"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddHistory"
+                style="@style/Widget.CashLens.Link"
+                android:text="@string/cash_add" />
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tvHistorySummary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="8dp"
-            android:accessibilityHeading="true"
-            android:text="Riwayat Transaksi"
-            android:textColor="@color/text"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@color/cash_secondary" />
 
         <TextView
-            android:id="@+id/tvEmpty"
+            android:id="@+id/historyEmpty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/panel_background"
-            android:padding="24dp"
-            android:gravity="center"
-            android:text="Belum ada transaksi.\nCatat pemasukan atau pengeluaran pertamamu."
-            android:textColor="@color/text_dim"
-            android:visibility="gone" />
+            android:paddingVertical="8dp"
+            android:text="@string/cash_empty_transactions"
+            android:textColor="@color/cash_secondary" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
@@ -159,17 +325,16 @@
             android:paddingBottom="8dp" />
     </LinearLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/fabAdd"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_gravity="bottom"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="16dp"
-        android:stateListAnimator="@animator/button_press"
-        android:text="Tambah transaksi"
-        android:textColor="@color/black"
-        app:icon="@drawable/ic_add"
-        app:iconGravity="textStart"
-        app:iconTint="@color/black" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        android:layout_height="wrap_content"
+        android:minHeight="76dp"
+        android:background="@drawable/cash_navigation_background"
+        android:elevation="0dp"
+        app:itemIconSize="23dp"
+        app:itemIconTint="@color/cash_nav_content"
+        app:itemTextColor="@color/cash_nav_content"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/cash_navigation" />
+</LinearLayout>

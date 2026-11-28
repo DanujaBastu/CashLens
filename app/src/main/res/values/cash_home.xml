@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="cash_background">#F5F6F0</color>
+    <color name="cash_surface">#FDFEFC</color>
+    <color name="cash_green">#164938</color>
+    <color name="cash_text">#162821</color>
+    <color name="cash_secondary">#496055</color>
+    <color name="cash_outline">#D7E0D8</color>
+    <color name="cash_mint">#DBEEE2</color>
+    <color name="cash_nav">#EAF2EA</color>
+    <color name="cash_budget_text">#C2E6D1</color>
+    <color name="cash_budget_track">#96BCA7</color>
+
+    <style name="Theme.CashLens.Home" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/cash_green</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorSecondaryContainer">@color/cash_mint</item>
+        <item name="colorOnSecondaryContainer">@color/cash_green</item>
+        <item name="colorSurface">@color/cash_surface</item>
+        <item name="colorOnSurface">@color/cash_text</item>
+        <item name="android:colorBackground">@color/cash_background</item>
+        <item name="android:statusBarColor">@color/cash_background</item>
+        <item name="android:navigationBarColor">@color/cash_background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+
+    <style name="Widget.CashLens.Heading" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/cash_text</item>
+        <item name="android:accessibilityHeading">true</item>
+    </style>
+
+    <style name="Widget.CashLens.Link" parent="Widget.Material3.Button.TextButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:paddingStart">4dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:textColor">@color/cash_green</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Widget.CashLens.Shortcut" parent="Widget.AppCompat.Button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">66dp</item>
+        <item name="android:paddingHorizontal">3dp</item>
+        <item name="android:paddingVertical">8dp</item>
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/cash_green</item>
+        <item name="android:background">@drawable/cash_shortcut_background</item>
+    </style>
+</resources>

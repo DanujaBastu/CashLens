@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/navHome" android:icon="@drawable/ic_cash_home" android:title="@string/cash_home" />
+    <item android:id="@+id/navHistory" android:icon="@drawable/ic_cash_history" android:title="@string/cash_history" />
+    <item android:id="@+id/navMap" android:icon="@drawable/ic_cash_map" android:title="@string/cash_map"
+        android:enabled="false" />
+    <item android:id="@+id/navInsight" android:icon="@drawable/ic_cash_insight" android:title="@string/cash_insight" />
+</menu>

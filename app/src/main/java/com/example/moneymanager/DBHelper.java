@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "money.db";
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 3;
     private static final String TABLE = "transactions";
 
     public DBHelper(Context ctx) {
@@ -27,6 +27,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "income INTEGER NOT NULL DEFAULT 0,"
                 + "category TEXT NOT NULL DEFAULT 'Lainnya',"
                 + "method TEXT NOT NULL,"
+                + "title TEXT NOT NULL DEFAULT '',"
+                + "store TEXT NOT NULL DEFAULT '',"
+                + "location TEXT NOT NULL DEFAULT '',"
                 + "notes TEXT,"
                 + "photo TEXT)");
     }
@@ -37,6 +40,11 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("ALTER TABLE " + TABLE + " ADD COLUMN income INTEGER NOT NULL DEFAULT 0");
             db.execSQL("ALTER TABLE " + TABLE + " ADD COLUMN category TEXT NOT NULL DEFAULT 'Lainnya'");
         }
+        if (oldV < 3) {
+            db.execSQL("ALTER TABLE " + TABLE + " ADD COLUMN title TEXT NOT NULL DEFAULT ''");
+            db.execSQL("ALTER TABLE " + TABLE + " ADD COLUMN store TEXT NOT NULL DEFAULT ''");
+            db.execSQL("ALTER TABLE " + TABLE + " ADD COLUMN location TEXT NOT NULL DEFAULT ''");
+        }
     }
 
     private ContentValues toValues(Transaction t) {
@@ -46,6 +54,9 @@ public class DBHelper extends SQLiteOpenHelper {
         v.put("income", t.income ? 1 : 0);
         v.put("category", t.category);
         v.put("method", t.method);
+        v.put("title", t.title);
+        v.put("store", t.store);
+        v.put("location", t.location);
         v.put("notes", t.notes);
         v.put("photo", t.photoPath);
         return v;
@@ -59,6 +70,9 @@ public class DBHelper extends SQLiteOpenHelper {
         t.income = c.getInt(c.getColumnIndexOrThrow("income")) == 1;
         t.category = c.getString(c.getColumnIndexOrThrow("category"));
         t.method = c.getString(c.getColumnIndexOrThrow("method"));
+        t.title = c.getString(c.getColumnIndexOrThrow("title"));
+        t.store = c.getString(c.getColumnIndexOrThrow("store"));
+        t.location = c.getString(c.getColumnIndexOrThrow("location"));
         t.notes = c.getString(c.getColumnIndexOrThrow("notes"));
         t.photoPath = c.getString(c.getColumnIndexOrThrow("photo"));
         if (t.notes == null) t.notes = "";

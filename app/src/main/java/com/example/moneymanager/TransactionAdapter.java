@@ -1,17 +1,19 @@
 package com.example.moneymanager;
 
+import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.moneymanager.databinding.ItemTransactionBinding;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.VH> {
 
@@ -39,22 +41,50 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VH h, int position) {
-        Transaction t = data.get(position);
-        boolean startsDay = position == 0 || !t.date.equals(data.get(position - 1).date);
-        h.b.tvDay.setVisibility(startsDay ? View.VISIBLE : View.GONE);
-        h.b.tvDay.setText(t.date);
-        h.b.dayDivider.setVisibility(startsDay && position > 0 ? View.VISIBLE : View.GONE);
-        h.b.tvNotes.setText(t.notes.isEmpty() ? t.category : t.notes);
-        h.b.tvCategory.setVisibility(t.notes.isEmpty() && t.photoPath == null ? View.GONE : View.VISIBLE);
-        h.b.tvCategory.setText(t.category + (t.photoPath != null ? "  •  ada struk" : ""));
-        h.b.tvAmount.setText((t.income ? "+" : "−") + Transaction.rupiah(t.amount));
-        h.b.tvAmount.setTextColor(ContextCompat.getColor(h.itemView.getContext(),
-                t.income ? R.color.income : R.color.expense));
-        h.b.transactionCard.setCardBackgroundColor(ContextCompat.getColor(h.itemView.getContext(),
-                t.income ? R.color.income_surface : R.color.expense_surface));
-        h.b.tvMethod.setText("Card".equals(t.method) ? "Kartu" : "Tunai");
-        h.b.transactionCard.setOnClickListener(v -> listener.onClick(t));
+    public void onBindViewHolder(@NonNull VH holder, int position) {
+        bind(holder.binding, data.get(position), listener);
+    }
+
+    static void bind(ItemTransactionBinding row, Transaction transaction, OnItemClick listener) {
+        Context context = row.getRoot().getContext();
+        String category = Transaction.displayCategory(transaction.category);
+        String previousTitle = transaction.notes.isEmpty() ? category : transaction.notes;
+        row.tvNotes.setText(transaction.title.isEmpty() ? previousTitle : transaction.title);
+        String amount = Transaction.rupiah(transaction.amount);
+        row.tvAmount.setText(transaction.income ? context.getString(R.string.cash_transaction_income, amount) : amount);
+
+        int method = "Card".equals(transaction.method) ? R.string.cash_card : R.string.cash_cash;
+        String details = context.getString(method);
+        if (transaction.photoPath != null) {
+            details = context.getString(R.string.cash_transaction_detail, details,
+                    context.getString(R.string.cash_receipt_detail));
+        }
+        row.tvDetails.setText(context.getString(R.string.cash_transaction_detail,
+                displayDate(transaction.date), details));
+        row.categoryIcon.setImageResource(iconFor(category));
+        row.getRoot().setOnClickListener(v -> listener.onClick(transaction));
+    }
+
+    private static String displayDate(String storedDate) {
+        try {
+            return new SimpleDateFormat("d MMM yyyy", MainActivity.INDONESIAN)
+                    .format(new SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(storedDate));
+        } catch (ParseException e) {
+            return storedDate;
+        }
+    }
+
+    private static int iconFor(String category) {
+        switch (category) {
+            case "Makanan dan minuman":
+                return R.drawable.ic_cash_food;
+            case "Transportasi":
+                return R.drawable.ic_cash_transport;
+            case "Belanja":
+                return R.drawable.ic_cash_shopping;
+            default:
+                return R.drawable.ic_cash_receipt;
+        }
     }
 
     @Override
@@ -63,11 +93,11 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     }
 
     static class VH extends RecyclerView.ViewHolder {
-        final ItemTransactionBinding b;
+        final ItemTransactionBinding binding;
 
-        VH(ItemTransactionBinding b) {
-            super(b.getRoot());
-            this.b = b;
+        VH(ItemTransactionBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 }
